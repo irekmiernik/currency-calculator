@@ -1,4 +1,4 @@
-# Currency conventer with styled components
+# Currency calculator (app is using styled components)
   
  ## Description
  You can calculate in this application the value of same currencies compare to polish currency: PLN
