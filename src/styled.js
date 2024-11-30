@@ -1,4 +1,19 @@
 import styled, { css } from "styled-components";
+import { createGlobalStyle } from "styled-components";
+import background from "./background.png";
+
+export const GlobalStyle = createGlobalStyle`
+    body {
+      font-family: 'Lato', sans-serif;
+      line-height: 1.5;
+      font-size: 15px;
+      margin: 10% auto;
+      background-image: url("${background}");
+      background-size: 100px;
+      background-repeat: repeat;
+      background-position: center;
+    }
+`;
 
 export const StyledDiv = styled.div`
     max-height: 1000px;
