@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { rateSet } from "./App";
+import { manageRates } from "./App";
 import { Curriencies } from "./Curriencies";
 import { StyledForm, StyleP, StyleStrong, StyledButton } from "./styled";
 
@@ -11,11 +11,11 @@ export const Calculator = () => {
   const [outCurrency, setOutCurrency] = useState("");
 
   const calculateValue = (inValue, rateIn, rateOut) =>
-    (rateIn > 0 & rateOut > 0 & +inValue > 0) ? ((rateIn / rateOut) * +inValue).toFixed(2) : "";
+    (rateIn > 0 & rateOut > 0 & +inValue > 0) ? ((1 / (rateIn / rateOut)) * +inValue).toFixed(2) : "";
 
   const onOblicz = (event) => {
     event.preventDefault();
-    let a = calculateValue(inValue, rateSet.getRate(inCurrency), rateSet.getRate(outCurrency));
+    let a = calculateValue(inValue, manageRates.getRate(inCurrency), manageRates.getRate(outCurrency));
     setOutValue(a);
   };
 
@@ -67,7 +67,7 @@ export const Calculator = () => {
         <p>
           <StyleStrong
             $rates
-            onClick={rateSet.toggleSwitcher}
+            onClick={manageRates.toggleSwitcher}
           >
             Aktualizacja kursów walut
           </StyleStrong>

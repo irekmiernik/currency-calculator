@@ -4,7 +4,7 @@ import { Container } from "./Container";
 import { Calculator } from "./Calculator";
 import { Updater } from "./Updater";
 import { Dater } from "./Dater";
-import { useRates } from "./useRates";
+import { useManageRates } from "./useManageRates";
 export let rateSet = null;
 
 const initialRatesTable = [
@@ -18,7 +18,7 @@ const initialRatesTable = [
 
 export default function App() {
 
-  rateSet = useRates({ initialRatesTable });
+  rateSet = useManageRates({ initialRatesTable });
 
   return (
     <Container>

@@ -1,8 +1,8 @@
-import { rateSet } from "./App";
+import { manageRates } from "./App";
 
 export const Curriencies = () => (
   <>
-    {rateSet.ratesTable.map(rate => (
+    {manageRates.ratesTable.map(rate => (
       <option key={rate.id}>
         {rate.curriency}
       </option>
