@@ -1,6 +1,9 @@
 import { useState } from "react";
+import { useGetRates } from "./useGetRates";
 
 export const useManageRates = ({ initialRatesTable }) => {
+
+  let ratesState = useGetRates();
 
   let initialRates = {
     meta: { last_updated_at: '2024-11-27T23:59:59Z' },
@@ -12,9 +15,11 @@ export const useManageRates = ({ initialRatesTable }) => {
     },
   };
 
-  initialRatesTable = initialRatesTable.concat(
-    Object.values((JSON.parse(localStorage.getItem("initialRates")) || initialRates).data)
-  );
+  initialRates = JSON.parse(localStorage.getItem("initialRates")) || initialRates;
+
+  let initialRatesDate = new Intl.DateTimeFormat().format(Date.parse(initialRates.meta.last_updated_at));
+  initialRatesTable = initialRatesTable.concat(Object.values(initialRates.data));
+
 
   initialRatesTable = initialRatesTable.map((e, i) =>
     i < 2 ? e : { id: i, curriency: e.code, rate: e.value }
@@ -45,7 +50,8 @@ export const useManageRates = ({ initialRatesTable }) => {
     saveRate,
     switcher,
     toggleSwitcher,
-    state,
+    ratesState,
+    initialRatesDate,
   };
 };
 

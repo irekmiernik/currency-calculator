@@ -64,14 +64,15 @@ export const Calculator = () => {
             Przelicz
           </StyledButton>
         </p>
-        <p>
+        <StyleP $dater>
+          Aktualne kursy walut pobrano z currencyapi.com
           <StyleStrong
             $rates
             onClick={manageRates.toggleSwitcher}
           >
-            Aktualizacja kursów walut
+            (Wprowadź własne kursy)
           </StyleStrong>
-        </p>
+        </StyleP>
       </StyledForm>
     </>
   )
