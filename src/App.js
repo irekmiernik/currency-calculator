@@ -3,7 +3,8 @@ import { Footer } from "./Footer";
 import { Container } from "./Container";
 import { Calculator } from "./Calculator";
 import { Updater } from "./Updater";
-import { Dater } from "./Dater";
+import { Dater } from "./Dater"
+import { Getter } from "./Getter";
 import { useManageRates } from "./useManageRates";
 export let manageRates = null;
 
@@ -16,12 +17,15 @@ export default function App() {
 
   manageRates = useManageRates({ initialRatesTable });
 
-  return (
-    <Container>
-      <Dater />
-      <Header title="Kalkulator walutowy" />
-      {(manageRates.switcher && <Calculator />) || (!manageRates.switcher && <Updater />)}
-      <Footer date="2024" />
-    </Container>
-  );
+  if (manageRates.ratesState === 0) {
+    return (<Container> <Getter /> </Container>)
+  } else
+    return (
+      <Container>
+        <Dater />
+        <Header title="Kalkulator walutowy" />
+        {(manageRates.switcher && <Calculator />) || (!manageRates.switcher && <Updater />)}
+        <Footer date="2024" />
+      </Container>
+    );
 };

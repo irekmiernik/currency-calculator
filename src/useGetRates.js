@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 export const useGetRates = () => {
 
-  const [ratesState, setRatesState] = useState(0);
+  const [ratesState, setRatesState] = useState(700);
 
   useEffect(() => {
     if ((JSON.parse(localStorage.getItem("initialRates")) == null) ||
