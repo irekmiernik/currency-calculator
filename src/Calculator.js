@@ -11,7 +11,7 @@ export const Calculator = () => {
   const [outCurrency, setOutCurrency] = useState("");
 
   const calculateValue = (inValue, rateIn, rateOut) =>
-    (rateIn > 0 & rateOut > 0 & +inValue > 0) ? ((1 / (rateIn / rateOut)) * +inValue).toFixed(2) : "";
+    (rateIn > 0 & rateOut > 0 & +inValue > 0) ? ((rateIn / rateOut) * +inValue).toFixed(2) : "";
 
   const onOblicz = (event) => {
     event.preventDefault();
@@ -64,8 +64,8 @@ export const Calculator = () => {
             Przelicz
           </StyledButton>
         </p>
-        <StyleP $dater>
-          Aktualne kursy walut pobrano z currencyapi.com
+        <StyleP $rates>
+          Kursy walut z dnia {manageRates.initialRatesDate} pobrano z currencyapi.com
           <StyleStrong
             $rates
             onClick={manageRates.toggleSwitcher}
@@ -75,5 +75,5 @@ export const Calculator = () => {
         </StyleP>
       </StyledForm>
     </>
-  )
+  );
 };

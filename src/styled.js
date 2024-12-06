@@ -44,6 +44,12 @@ export const StyleP = styled.p`
         max-width: 700px;
         background-color: #fff;  
     `};
+
+    ${({ $rates }) => $rates && css`
+        color: #00000099;
+        font-weight: normal;
+        font-style: italic;
+    `};
 `;
 
 export const StyledHeader = styled.header`
