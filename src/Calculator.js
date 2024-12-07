@@ -65,14 +65,14 @@ export const Calculator = () => {
           </StyledButton>
         </p>
         <StyleP $rates>
-          Kursy walut z dnia {manageRates.initialRatesDate} pobrano z currencyapi.com
-          <StyleStrong
-            $rates
-            onClick={manageRates.toggleSwitcher}
-          >
-            (Wprowadź własne kursy)
-          </StyleStrong>
+          {manageRates.ratesLabel}
         </StyleP>
+        <StyleStrong
+          $rates
+          onClick={manageRates.toggleSwitcher}
+        >
+          (Możesz zastosować własne kursy)
+        </StyleStrong>
       </StyledForm>
     </>
   );

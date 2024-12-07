@@ -49,6 +49,8 @@ export const StyleP = styled.p`
         color: #00000099;
         font-weight: normal;
         font-style: italic;
+        max-width: 400px;
+        margin: 0 auto;
     `};
 `;
 
@@ -65,7 +67,7 @@ export const StyleFooter = styled.footer`
   font-family: monospace;
   color: #00000077;
   text-align: center;
-  margin: 0 auto;
+  margin: 15px auto;
   max-width: 400px;
 `;
 

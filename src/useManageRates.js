@@ -23,6 +23,16 @@ export const useManageRates = ({ initialRatesTable }) => {
   const [ratesTable, setRatesTable] = useState(initialRatesTable);
   let ratesState = useGetRates();
 
+  let ratesLabel = "";
+  switch (ratesState) {
+    case 200:
+      ratesLabel = "Aktualne kursy walut pobrano z currencyapi.com";
+      break;
+    default:
+      ratesLabel = `Nie udało się pobrać aktualnych kursów walut z currencyapi.com.
+        Pobrano kursy historyczne z dnia ${initialRatesDate}r.`;
+  };
+
   const index = (curriency) => {
     for (let i = 0; i < ratesTable.length; i++) {
       if (ratesTable[i].curriency === curriency) return i;
@@ -45,7 +55,7 @@ export const useManageRates = ({ initialRatesTable }) => {
     saveRate,
     switcher,
     toggleSwitcher,
-    initialRatesDate,
+    ratesLabel,
     ratesState,
   };
 };
