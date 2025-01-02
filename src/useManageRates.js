@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { useGetRates } from "./useGetRates";
 
 export const useManageRates = ({ initialRatesTable }) => {
+
+  const [ifUpdateRates, setIfUpdateRates] = useState(false);
 
   let initialRates = {
     meta: { last_updated_at: '2024-11-27T23:59:59Z' },
@@ -13,24 +14,20 @@ export const useManageRates = ({ initialRatesTable }) => {
     },
   };
 
-  initialRates = JSON.parse(localStorage.getItem("initialRates")) || initialRates;
+  if (JSON.parse(localStorage.getItem("initialRates")) !== null)
+    initialRates = JSON.parse(localStorage.getItem("initialRates"));
   initialRatesTable = initialRatesTable.concat(Object.values(initialRates.data));
   initialRatesTable = initialRatesTable.map((e, i) =>
     i < 2 ? e : { id: i, curriency: e.code, rate: (1 / e.value).toFixed(2) });
-  let initialRatesDate = new Intl.DateTimeFormat().format(Date.parse(initialRates.meta.last_updated_at));
-
-  const [switcher, setSwitcher] = useState(true);
+  const initialRatesDate = new Intl.DateTimeFormat().format(Date.parse(initialRates.meta.last_updated_at));
   const [ratesTable, setRatesTable] = useState(initialRatesTable);
-  let ratesState = useGetRates();
 
-  let ratesLabel = "";
-  switch (ratesState) {
-    case 200:
-      ratesLabel = "Aktualne kursy walut pobrano z currencyapi.com";
-      break;
-    default:
-      ratesLabel = `Nie udało się pobrać aktualnych kursów walut z currencyapi.com.
-        Pobrano kursy historyczne z dnia ${initialRatesDate}r.`;
+  let ratesLabel;
+  if (initialRatesDate === new Intl.DateTimeFormat().format(Date.now())) {
+    ratesLabel = "Aktualne kursy walut pobrano z currencyapi.com";
+  } else {
+    ratesLabel = `Nie udało się pobrać aktualnych kursów walut z currencyapi.com.
+      Pobrano kursy historyczne z dnia ${initialRatesDate}r.`;
   };
 
   const index = (curriency) => {
@@ -47,15 +44,14 @@ export const useManageRates = ({ initialRatesTable }) => {
     }));
   };
 
-  const toggleSwitcher = () => setSwitcher(switcher => !switcher);
+  const toggleIfUpdateRates = () => setIfUpdateRates(ifUpdateRates => !ifUpdateRates);
 
   return {
     ratesTable,
     getRate,
     saveRate,
-    switcher,
-    toggleSwitcher,
+    ifUpdateRates,
+    toggleIfUpdateRates,
     ratesLabel,
-    ratesState,
   };
 };

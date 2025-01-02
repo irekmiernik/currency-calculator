@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { manageRates } from "./App";
+import { manageRates } from "./Main";
 import { Curriencies } from "./Curriencies";
 import { StyledForm, StyleP, StyleStrong, StyledButton } from "./styled";
 
 export const Updater = () => {
 
+  const { getRate, saveRate, toggleIfUpdateRates } = manageRates;
   const [currency, setCurrency] = useState("");
   const [rate, setRate] = useState("");
   const [showRate, setShowRate] = useState(true);
@@ -12,10 +13,10 @@ export const Updater = () => {
   const onClick = (event) => {
     event.preventDefault();
     if (showRate) {
-      setRate(manageRates.getRate(currency));
+      setRate(getRate(currency));
     } else {
       setShowRate(true);
-      manageRates.saveRate(currency, rate);
+      saveRate(currency, rate);
     }
   };
 
@@ -57,7 +58,7 @@ export const Updater = () => {
       <p>
         <StyleStrong
           $rates
-          onClick={manageRates.toggleSwitcher}
+          onClick={toggleIfUpdateRates}
         >
           Powrót do kalkulacji
         </StyleStrong>

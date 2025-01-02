@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { manageRates } from "./App";
+import { manageRates } from "./Main";
 import { Curriencies } from "./Curriencies";
 import { StyledForm, StyleP, StyleStrong, StyledButton } from "./styled";
 
 export const Calculator = () => {
 
+  const { getRate, ratesLabel, toggleIfUpdateRates } = manageRates;
   const [inValue, setInValue] = useState("");
   const [outValue, setOutValue] = useState("");
   const [inCurrency, setInCurrency] = useState("");
@@ -15,7 +16,7 @@ export const Calculator = () => {
 
   const onOblicz = (event) => {
     event.preventDefault();
-    let a = calculateValue(inValue, manageRates.getRate(inCurrency), manageRates.getRate(outCurrency));
+    let a = calculateValue(inValue, getRate(inCurrency), getRate(outCurrency));
     setOutValue(a);
   };
 
@@ -65,11 +66,11 @@ export const Calculator = () => {
           </StyledButton>
         </p>
         <StyleP $rates>
-          {manageRates.ratesLabel}
+          {ratesLabel}
         </StyleP>
         <StyleStrong
           $rates
-          onClick={manageRates.toggleSwitcher}
+          onClick={toggleIfUpdateRates}
         >
           (Możesz zastosować własne kursy)
         </StyleStrong>
