@@ -5,9 +5,9 @@ import { Main } from "./Main";
 
 export default function App() {
 
-  const { requestState, stateAPI } = useGetAPIRates();
+  const { requestState } = useGetAPIRates();
 
-  if (stateAPI === 0 && (requestState === 2 || requestState === 3)) {
+  if (requestState > 0) {
     return (<Container> <Getter /> </Container>);
   } else {
     return (<Container> <Main /> </Container>);
